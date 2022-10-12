@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n" crossorigin="anonymous" />
+    <style type="text/css">
+#s7y2020-superpowers
+{
+--bs-accordion-btn-bg: #212529;
+--bs-accordion-btn-color: #fff;
+--bs-accordion-active-bg: var(--bs-accordion-btn-bg);
+--bs-accordion-active-color: var(--bs-accordion-btn-color);
+}
+
+.s7y2020-us {
+  --bs-card-cap-bg: var(--bs-green);
+}
+
+.s7y2020-gb {
+  --bs-card-cap-bg: var(--bs-purple);
+}
+
+.s7y2020-eu {
+  --bs-card-cap-bg: var(--bs-blue);
+}
+
+.s7y2020-ru {
+  --bs-card-cap-bg: var(--bs-orange);
+}
+
+.s7y2020-cn {
+  --bs-card-cap-bg: var(--bs-red);
+}
+
+.s7y2020-jp {
+  --bs-card-cap-bg: var(--bs-teal);
+}
+    </style>
+  </head>
+  <body class="bg-dark">
+    <div class="container-fluid g-0">
+      <div id="app">
+        <template v-for="(superpower, id) in superpowers">
+          <div class="card text-bg-secondary mb-3" v-bind="{ class: 's7y2020-'+id }">
+            <div class="card-header">
+              <nav class="navbar navbar-dark">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">{{ superpower.name }}</a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" v-bind="{ 'data-bs-target': '#s7y2020-'+id+'-collapse' }" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="bi-caret-down-fill"></span>
+                  </button>
+                </div>
+              </nav>
+            </div>
+            <div v-bind="{ id: 's7y2020-'+id+'-collapse' }" class="collapse">
+              <div class="card-body text-center">
+<div class="row">
+                <div class="col-3">Cash</div>
+                <div class="col-6">$7000</div>
+              </div>
+              <div class="row">
+                <div class="col-3">Loans</div>
+                <div class="col-6">$5000</div>
+                <div class="col-3">- $400</div>
+              </div>
+              <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6"><h3>Produce</h3></div>
+                <div class="col-3"></div>
+              </div>
+              <div class="row">
+                <div class="col-3">Bonds</div>
+                <div class="col-6">$5000</div>
+                <div class="col-3">+ $400</div>
+              </div>
+              <div class="row">
+                <div class="col-3">Companies</div>
+                <div class="col-6">3</div>
+                <div class="col-3">- $300</div>
+              </div>
+              <div class="row">
+                <div class="col-3">Minerals</div>
+                <div class="col-6">5</div>
+                <div class="col-3">+ 5 Minerals</div>
+              </div>
+              <div class="row">
+                <div class="col-3">Oil</div>
+                <div class="col-6">5</div>
+                <div class="col-3">+ 5 Oil</div>
+              </div>
+              <div class="row">
+                <div class="col-3">Grain</div>
+                <div class="col-6">5</div>
+                <div class="col-3">+ 5 Grain</div>
+              </div>
+              <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6"><h3>Trade</h3></div>
+                <div class="col-3"><button type="button" class="btn btn-secondary btn-sm">Reset</button></div>
+              </div>
+              <div class="row">
+                <div class="col-3">Units</div>
+                <div class="col-6">9</div>
+                <div class="col-3">- 0 Grain</div>
+              </div>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">An item</li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+              </ul>
+            </div>
+            <div class="card-footer"><span v-if="turn.superpower == id" class="badge text-bg-secondary">{{ turn.step }}</span></div>
+          </div>
+        </template>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.40/dist/vue.global.min.js" integrity="sha384-UuY8Z3d+A7F54aaQSmWPPk14wAnryVr7Kvp57WtzI99njwwP/YePk8lG/kRawI1J" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+<![CDATA[
+const { createApp } = Vue
+
+createApp({
+  data() {
+    return {
+      superpowers: {
+        us: {
+          id: 'us',
+          name: 'United States'
+        },
+        gb: {
+          id: 'gb',
+          name: 'Commonwealth'
+        },
+        eu: {
+          id: 'eu',
+          name: 'European Union'
+        },
+        ru: {
+          id: 'ru',
+          name: 'Russian Federation',
+        },
+        cn: {
+          id: 'cn',
+          name: 'China'
+        },
+        jp: {
+          id: 'jp',
+          name: 'Japan'
+        }
+      },
+      steps: [
+        "Produce",
+        "Trade",
+        "Attack",
+        "Build"
+      ],
+      turn: {
+        superpower: 'us',
+        step: 'Produce'
+      }
+    }
+  }
+}).mount('#app')
+]]>
+    </script>
+  </body>
+</html>
