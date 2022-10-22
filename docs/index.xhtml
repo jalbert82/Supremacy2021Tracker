@@ -48,27 +48,21 @@
           <div class="card-header">
             <nav class="navbar navbar-dark">
               <div class="container-fluid">
-                <a class="navbar-brand" href="#">Bank</a>
+                <h2 class="h2 navbar-brand">Bank</h2>
               </div>
             </nav>
           </div>
           <div class="card-body text-center">
-            <table class="table text-light">
-              <thead>
-                <tr>
-                  <th width="33%">Minerals</th>
-                  <th width="33%">Oil</th>
-                  <th width="33%">Grain</th>
-                </tr>
-              </thead>
-                <tbody>    
-                  <tr>
-                    <td width="33%">$600</td>
-                    <td width="33%">$600</td>
-                    <td width="33%">$600</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="row">
+              <h5 class="h5 col-12 col-md-4">Minerals</h5>
+              <div class="col-12 col-md-4 order-md-3">${{ bank.minerals }}</div>
+              <hr class="d-block d-md-none mt-3" />
+              <h5 class="h5 col-12 col-md-4 order-md-1">Oil</h5>
+              <div class="col-12 col-md-4 order-md-4">${{ bank.oil }}</div>
+              <hr class="d-block d-md-none mt-3" />
+              <h5 class="h5 col-12 col-md-4 order-md-2">Grain</h5>
+              <div class="col-12 col-md-4 order-md-5">${{ bank.grain }}</div>
+            </div>
           </div>
         </div>
         <template v-for="(superpower, id) in superpowers">
@@ -92,91 +86,39 @@
             </div>
             <div v-bind="{ id: 's7y2020-'+id+'-collapse' }" class="collapse">
               <div class="card-body text-center">
-                <table class="table text-light">
-                  <tbody>
-                    <tr>
-                      <th width="33%">Cash</th>
-                      <td width="33%" colspan="3">${{ superpower.cash }}</td>
-                      <td width="33%"></td>
-                    </tr>
-                    <tr>
-                      <th width="33%">Loans</th>
-                      <td width="11%">
-                        <button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addLoan(-1); } }">
-                          <span class="bi-dash-lg"></span>
-                        </button>
-                      </td>
-                      <td width="11%">${{ superpower.loans * 1000 }}</td>
-                      <td width="11%">
-                        <button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addLoan(1); } }">
-                          <span class="bi-plus-lg"></span>
-                        </button>
-                      </td>
-                      <td width="33%">- ${{ interest[superpower.loans] }}</td>
-                    </tr>
-                    <tr>
-                      <th width="33%">Bonds</th>
-                      <td width="11%">
-                        <button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addBond(-1); } }">
-                          <span class="bi-dash-lg"></span>
-                        </button>
-                      </td>
-                      <td width="11%">${{ superpower.bonds * 1000 }}</td>
-                      <td width="11%">
-                        <button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addBond(1); } }">
-                          <span class="bi-plus-lg"></span>
-                        </button>
-                      </td>
-                      <td width="33%">+ ${{ interest[superpower.bonds] }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6"><h3>Produce</h3></div>
-                <div class="col-3"></div>
+                <div class="row">
+                  <h5 class="h5 col-12 col-md-4">Cash</h5>
+                  <div class="col-12 col-md-4">${{ superpower.cash }}</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <h5 class="h5 col-12 col-md-4">Loans</h5>
+                  <div class="col-4 col-md-1"><button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addLoan(-1); } }"><span class="bi-dash-lg"></span></button></div>
+                  <div class="col-4 col-md-2">${{ superpower.loans * 1000 }}</div>
+                  <div class="col-4 col-md-1"><button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addLoan(1); } }"><span class="bi-plus-lg"></span></button></div>
+                  <div class="col-12 col-md-4">- ${{ interest[superpower.loans] }}</div>
+                </div>
+                <hr />
+                <div class="row">
+                  <h5 class="h5 col-12 col-md-4">Bonds</h5>
+                  <div class="col-4 col-md-1"><button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addBond(-1); } }"><span class="bi-dash-lg"></span></button></div>
+                  <div class="col-4 col-md-2">${{ superpower.bonds * 1000 }}</div>
+                  <div class="col-4 col-md-1"><button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.addBond(1); } }"><span class="bi-plus-lg"></span></button></div>
+                  <div class="col-12 col-md-4">+ ${{ interest[superpower.bonds] }}</div>
+                </div>
+                <hr />
+                <div class="row mb-3">
+                  <h5 class="h5 col-12 col-md-4">Minerals</h5>
+                  <div class="col-4 col-md-1"><button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.tradeResource('minerals',-1); } }"><span class="bi-dash-lg"></span></button></div>
+                  <div class="col-4 col-md-2">{{ superpower.resources.minerals + superpower.trade.minerals }}</div>
+                  <div class="col-4 col-md-1"><button type="button" class="btn btn-sm btn-light" v-on="{ click: function() { superpower.tradeResource('minerals',1); } }"><span class="bi-plus-lg"></span></button></div>
+                  <div class="col-12 col-md-4">{{ superpower.trade.minerals }}, ${{ superpower.trade.minerals * bank.minerals }}</div>
+                </div>
+                <div class="row d-grid d-md-flex gap-3 gap-md-0">
+                  <div class="d-grid col-12 col-md-6"><button type="button" class="btn btn-light">Trade</button></div>
+                  <div class="d-grid col-12 col-md-6"><button type="button" class="btn btn-light" v-on="{ click: function() { superpower.finishTrade(bank); } }">Finish</button></div>
+                </div>
               </div>
-              <div class="row">
-                <div class="col-3">Bonds</div>
-                <div class="col-6">$5000</div>
-                <div class="col-3">+ $400</div>
-              </div>
-              <div class="row">
-                <div class="col-3">Companies</div>
-                <div class="col-6">3</div>
-                <div class="col-3">- $300</div>
-              </div>
-              <div class="row">
-                <div class="col-3">Minerals</div>
-                <div class="col-6">5</div>
-                <div class="col-3">+ 5 Minerals</div>
-              </div>
-              <div class="row">
-                <div class="col-3">Oil</div>
-                <div class="col-6">5</div>
-                <div class="col-3">+ 5 Oil</div>
-              </div>
-              <div class="row">
-                <div class="col-3">Grain</div>
-                <div class="col-6">5</div>
-                <div class="col-3">+ 5 Grain</div>
-              </div>
-              <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6"><h3>Trade</h3></div>
-                <div class="col-3"><button type="button" class="btn btn-secondary btn-sm">Reset</button></div>
-              </div>
-              <div class="row">
-                <div class="col-3">Units</div>
-                <div class="col-6">9</div>
-                <div class="col-3">- 0 Grain</div>
-              </div>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-              </ul>
             </div>
             <div class="card-footer"></div>
           </div>
@@ -203,6 +145,8 @@ function Superpower(id, name) {
   this.cash = 7000;
   this.loans = 0;
   this.bonds = 0;
+  this.resources = { minerals: 0 };
+  this.trade = { minerals: 0 };
 }
 
 Superpower.prototype.addLoan = function(i) {
@@ -213,6 +157,17 @@ Superpower.prototype.addLoan = function(i) {
 Superpower.prototype.addBond = function(i) {
   this.bonds += i;
   this.cash -= (i * 1000);
+}
+
+Superpower.prototype.tradeResource = function(resource, i) {
+  this.trade[resource] += i;
+}
+
+Superpower.prototype.finishTrade = function(bank) {
+  this.cash -= (this.trade.minerals * bank.minerals);
+  this.resources.minerals += this.trade.minerals;
+  bank.minerals += Math.round(this.trade.minerals / 2.0) * 100;
+  this.trade.minerals = 0;
 }
 
 createApp({
@@ -233,6 +188,11 @@ createApp({
         2400,
         3200
       ],
+      bank: {
+        minerals: 600,
+        oil: 600,
+        grain: 600,
+      },
       superpowers: {
         us: new Superpower('us', 'United States'),
         gb: new Superpower('gb', 'Commonwealth'),
